@@ -833,6 +833,8 @@ func replaceOverlayDatapath(ctx context.Context, logger *slog.Logger, lnc *datap
 		cfg.VTEPMask = byteorder.NetIPv4ToHost32(net.IP(option.Config.VtepCidrMask))
 	}
 
+	cfg.EncryptionStrictIngress = option.Config.EnableEncryptionStrictModeIngress
+
 	var obj overlayObjects
 	commit, err := bpf.LoadAndAssign(logger, &obj, spec, &bpf.CollectionOptions{
 		Constants: cfg,
