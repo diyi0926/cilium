@@ -1,11 +1,6 @@
 // SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
 /* Copyright Authors of Cilium */
 
-#ifndef __CLUSTERMESH_HELPERS__
-#define __CLUSTERMESH_HELPERS__
-#define IDENTITY_LEN 15
-#endif
-
 #define get_cluster_id_max() 511
 
 #include <bpf/ctx/skb.h>
@@ -15,10 +10,11 @@
 #include "common.h"
 
 ASSIGN_CONFIG(__u32, identity_max, 32767)
+ASSIGN_CONFIG(__u32, identity_len, 15)
 
 #define CLUSTER_LOCAL_IDENTITY 0x5555
 #define TEST_CLUSTER_ID 0x1FFu
-#define IDENTITY (0x00000000u | (TEST_CLUSTER_ID << IDENTITY_LEN) | CLUSTER_LOCAL_IDENTITY)
+#define IDENTITY (0x00000000u | (TEST_CLUSTER_ID << CONFIG(identity_len)) | CLUSTER_LOCAL_IDENTITY)
 
 CHECK("tc", "set_and_get_identity")
 int check_get_identity(struct __ctx_buff *ctx)
@@ -55,4 +51,3 @@ int check_ctx_get_cluster_id_mark(struct __ctx_buff *ctx)
 
 	test_finish();
 }
-

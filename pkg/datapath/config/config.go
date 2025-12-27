@@ -14,6 +14,7 @@ func NodeConfig(lnc *datapath.LocalNodeConfiguration) Node {
 	node := *NewNode()
 	node.ClusterIDMax = option.Config.MaxConnectedClusters
 	node.IdentityMax = identity.GetIdentityMax()
+	node.IdentityLen = identity.GetClusterIDShift()
 
 	if lnc.ServiceLoopbackIPv4 != nil {
 		node.ServiceLoopbackIPv4 = [4]byte(lnc.ServiceLoopbackIPv4.To4())
