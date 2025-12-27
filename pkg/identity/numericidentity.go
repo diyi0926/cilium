@@ -328,6 +328,12 @@ func GetClusterIDShift() uint32 {
 	return clusterIDShift
 }
 
+// GetIdentityMax returns the maximum identity value which depends on number of bits
+// that represent a cluster-local identity.
+func GetIdentityMax() uint32 {
+	return uint32((1 << GetClusterIDShift()) - 1)
+}
+
 // initClusterIDShift sets variables that control the bit allocation of cluster
 // ID in a numeric identity.
 func initClusterIDShift() {

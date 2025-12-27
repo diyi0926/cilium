@@ -4,7 +4,6 @@
 #ifndef __CLUSTERMESH_HELPERS__
 #define __CLUSTERMESH_HELPERS__
 #define IDENTITY_LEN 8
-#define IDENTITY_MAX 255
 #endif
 
 #define get_cluster_id_max() 255
@@ -14,6 +13,8 @@
 #include <lib/clustermesh.h>
 #include <lib/identity.h>
 #include "common.h"
+
+ASSIGN_CONFIG(__u32, identity_max, 255)
 
 #define CLUSTER_LOCAL_IDENTITY 0xAAAA
 #define TEST_CLUSTER_ID 0xFFu

@@ -225,7 +225,6 @@ return false;
 #ifndef __CLUSTERMESH_HELPERS__
 #define __CLUSTERMESH_HELPERS__
 #define IDENTITY_LEN 16
-#define IDENTITY_MAX 65535
 #endif
 
 /*

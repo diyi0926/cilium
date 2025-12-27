@@ -123,3 +123,37 @@ func TestGetClusterIDShift(t *testing.T) {
 		})
 	}
 }
+
+func TestGetIdentityMax(t *testing.T) {
+	resetClusterIDInit := func() { clusterIDInit = sync.Once{} }
+
+	tests := []struct {
+		name                 string
+		maxConnectedClusters uint32
+		expectedIdentityMax  uint32
+	}{
+		{
+			name:                 "clustermesh255",
+			maxConnectedClusters: 255,
+			expectedIdentityMax:  65535,
+		},
+		{
+			name:                 "clustermesh511",
+			maxConnectedClusters: 511,
+			expectedIdentityMax:  32767,
+		},
+	}
+
+	// cleanup state from any previous tests
+	resetClusterIDInit()
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			t.Cleanup(resetClusterIDInit)
+			cinfo := cmtypes.ClusterInfo{MaxConnectedClusters: tt.maxConnectedClusters}
+			cinfo.InitClusterIDMax()
+
+			assert.Equal(t, tt.expectedIdentityMax, GetIdentityMax())
+		})
+	}
+}
