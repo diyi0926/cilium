@@ -7,8 +7,9 @@
 NODE_CONFIG(__u32, cluster_id_max, "Max number of clusters that can be connected in Clustermesh")
 ASSIGN_CONFIG(__u32, cluster_id_max, 255)
 
-NODE_CONFIG(__u32, identity_max, "Identity max value")
 NODE_CONFIG(__u32, identity_len, "Identity length in bits")
+
+#define IDENTITY_MAX (__u32)((1 << CONFIG(identity_len)) - 1)
 
 #ifndef get_cluster_id_max
 static __always_inline __u32

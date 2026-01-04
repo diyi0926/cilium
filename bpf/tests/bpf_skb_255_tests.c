@@ -9,8 +9,10 @@
 #include <lib/identity.h>
 #include "common.h"
 
-ASSIGN_CONFIG(__u32, identity_max, 255)
 ASSIGN_CONFIG(__u32, identity_len, 8)
+
+#undef IDENTITY_MAX
+#define IDENTITY_MAX 255
 
 #define CLUSTER_LOCAL_IDENTITY 0xAAAA
 #define TEST_CLUSTER_ID 0xFFu

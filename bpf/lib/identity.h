@@ -33,7 +33,7 @@ get_identity(const struct __ctx_buff *ctx __maybe_unused)
 	__u32 cluster_id_lower = ctx->mark & CLUSTER_ID_LOWER_MASK;
 	__u32 cluster_id_upper = (ctx->mark & get_cluster_id_upper_mask()) >>
 				      (8 + CONFIG(identity_len));
-	__u32 identity = (ctx->mark >> 16) & CONFIG(identity_max);
+	__u32 identity = (ctx->mark >> 16) & IDENTITY_MAX;
 
 	return (cluster_id_lower | cluster_id_upper) << CONFIG(identity_len) | identity;
 #else /* __ctx_is == __ctx_xdp */
@@ -69,7 +69,7 @@ set_identity_mark(struct __ctx_buff *ctx __maybe_unused, __u32 identity __maybe_
 
 	ctx->mark = (magic & MARK_MAGIC_KEY_MASK);
 	ctx->mark &= MARK_MAGIC_KEY_MASK;
-	ctx->mark |= (identity & CONFIG(identity_max)) << 16 | cluster_id_lower | cluster_id_upper;
+	ctx->mark |= (identity & IDENTITY_MAX) << 16 | cluster_id_lower | cluster_id_upper;
 #endif
 }
 
