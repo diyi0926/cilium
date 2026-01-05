@@ -13,6 +13,7 @@
 
 #include "endian.h"
 #include "eth.h"
+#include "devices.h"
 #include "ipv6_core.h"
 #include "map_defs.h"
 #include "config.h"
